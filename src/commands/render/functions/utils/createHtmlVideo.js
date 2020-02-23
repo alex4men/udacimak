@@ -15,7 +15,11 @@ export default async function createHtmlVideo(videoId, outputPath, prefix, title
   try {
     video = await downloadYoutube(videoId, outputPath, prefix, title);
   } catch (error) {
-    throw error;
+    try {
+      video = await downloadYoutube(videoId, outputPath, prefix, title, '18');
+    } catch {
+      throw error;
+    }
   }
 
   if (!video) return '';
